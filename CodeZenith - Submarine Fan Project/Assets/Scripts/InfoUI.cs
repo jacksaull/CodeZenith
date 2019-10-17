@@ -20,6 +20,6 @@ public class InfoUI : MonoBehaviour
 
     public void updateInfo(float Speed)
     {
-        playerSpeed.text = "Speed: {0}", Speed;
+        playerSpeed.text = Speed.ToString("f1");
     }
 }

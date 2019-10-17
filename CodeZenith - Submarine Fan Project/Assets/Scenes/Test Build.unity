@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2c1b1f01e616a4caca0d9e169d13ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScriptUI: {fileID: 1753931320}
 --- !u!136 &194960093
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -626,7 +627,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -879,7 +880,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1149,4 +1150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fanSpeed: {fileID: 669865911}
-  playeSpeed: {fileID: 1099613176}
+  playerSpeed: {fileID: 1099613176}

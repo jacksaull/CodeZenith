@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion rotation;
     private float rotationX = 0;
     private Rigidbody go_rigidBody;
-    private float speed = 20;
-    private float totalSpeed = 0;
+    private float speed = 10;
+    private float smagnitude;
 
     public InfoUI ScriptUI;
     // Start is called before the first frame update
@@ -46,15 +46,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey("w"))
         {
             go_rigidBody.AddForce(transform.forward * speed);
-            totalSpeed += speed;
+            smagnitude = go_rigidBody.velocity.magnitude;
 
-            ScriptUI.updateInfo(totalSpeed);
+            ScriptUI.updateInfo(smagnitude);
         }
 
-        if (totalSpeed > 0)
+        if (smagnitude > 0)
         {
-            go_rigidBody.drag = 2;
-            totalSpeed -= 2;
+            go_rigidBody.drag = 1.5f;
+            smagnitude = go_rigidBody.velocity.magnitude;
+
+            ScriptUI.updateInfo(smagnitude);
         }
         else
         {
