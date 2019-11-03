@@ -28,16 +28,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            rotationX -= 1;
-            rotation = Quaternion.Euler(rotationX, 90, 90);
+            rotationX -= 0.6f;
+            rotation = Quaternion.Euler(rotationX, 90, 180);
             this.gameObject.transform.rotation = rotation;
 
             Debug.Log("1");
         }
         else if (Input.GetMouseButton(1))
         {
-            rotationX += 1;
-            rotation = Quaternion.Euler(rotationX, 90, 90);
+            rotationX += 0.6f;
+            rotation = Quaternion.Euler(rotationX, 90, 180);
             this.gameObject.transform.rotation = rotation;
 
             Debug.Log("2");

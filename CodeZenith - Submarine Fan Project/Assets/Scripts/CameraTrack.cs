@@ -6,7 +6,7 @@ public class CameraTrack : MonoBehaviour
 {
     public GameObject player;
     private float playerX;
-
+    private float offset = 3.7f;
     void Start()
     {
 
@@ -15,6 +15,6 @@ public class CameraTrack : MonoBehaviour
     void LateUpdate()
     {
         playerX = player.transform.position.x;
-        transform.position = new Vector3(playerX, transform.position.y, transform.position.z);
+        transform.position = new Vector3(playerX+offset, transform.position.y, transform.position.z);
     }
 }
