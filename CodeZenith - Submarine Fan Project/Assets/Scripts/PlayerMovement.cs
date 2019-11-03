@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.Ports;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,17 +12,19 @@ public class PlayerMovement : MonoBehaviour
     private float smagnitude;
 
     public InfoUI ScriptUI;
-    // Start is called before the first frame update
+
+    //SerialPort stream = new SerialPort(DEVICE NAME, 9600); 
     void Start()
     {
         go_rigidBody = this.gameObject.GetComponent<Rigidbody>();
         go_rigidBody.useGravity = false;
+
+        //stream.Open();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        //string controllerValue = stream.ReadLine();
     }
 
     private void FixedUpdate()
