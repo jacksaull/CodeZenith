@@ -6,7 +6,7 @@ public class CameraTrack : MonoBehaviour
 {
     public GameObject player;
     private float playerX;
-    private float offset = 3.7f;
+    private float offset = 5.8f;
     void Start()
     {
 

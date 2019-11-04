@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject Rotor;
     private Quaternion rotation;
     private float rotationX = 0;
     private Rigidbody go_rigidBody;
-    private float speed = 10;
+    private float speed = 5;
     private float smagnitude;
 
+    private float currentRotation = 0;
+
+    private float rotorSpeed = 0;
+    private float rotorRate = 5f;
+    private float currentRotorRotation;
     public InfoUI ScriptUI;
 
     //SerialPort stream = new SerialPort(DEVICE NAME, 9600); 
@@ -18,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         go_rigidBody = this.gameObject.GetComponent<Rigidbody>();
         go_rigidBody.useGravity = false;
+        Rotor.transform.localRotation = Quaternion.Euler(-180, 0, 0);
 
         //stream.Open();
     }
@@ -25,25 +32,47 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //string controllerValue = stream.ReadLine();
+        rotorSpeed = rotorRate * smagnitude;
+        Rotor.transform.Rotate(0, 0, rotorSpeed, Space.Self);
     }
 
     private void FixedUpdate()
     {
         if (Input.GetMouseButton(0))
         {
-            rotationX -= 0.6f;
-            rotation = Quaternion.Euler(rotationX, 90, 180);
-            this.gameObject.transform.rotation = rotation;
-
-            Debug.Log("1");
+            if (currentRotation == -30)
+            {
+                rotation = Quaternion.Euler(-30, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+            else
+            {
+                rotationX -= 0.5f;
+                currentRotation -= 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
         }
         else if (Input.GetMouseButton(1))
         {
-            rotationX += 0.6f;
-            rotation = Quaternion.Euler(rotationX, 90, 180);
-            this.gameObject.transform.rotation = rotation;
+            if (currentRotation == 30)
+            {
+                rotation = Quaternion.Euler(30, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+            else
+            {
+                rotationX += 0.5f;
+                currentRotation += 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
 
-            Debug.Log("2");
+            if (this.transform.rotation.x >= 30)
+            {
+                rotation = Quaternion.Euler(30, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
         }
 
         if (Input.GetKey("w"))
@@ -56,14 +85,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (smagnitude > 0)
         {
-            go_rigidBody.drag = 1.5f;
+            go_rigidBody.drag = 1.7f;
             smagnitude = go_rigidBody.velocity.magnitude;
 
             ScriptUI.updateInfo(smagnitude);
         }
         else
         {
-            go_rigidBody.drag = 0;
+            go_rigidBody.drag = 1;
             return;
         }
     }
