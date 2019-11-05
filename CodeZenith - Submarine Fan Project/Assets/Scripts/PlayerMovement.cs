@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (smagnitude > 0)
         {
-            go_rigidBody.drag = 1.7f;
+            go_rigidBody.drag = 1.4f;
             smagnitude = go_rigidBody.velocity.magnitude;
 
             ScriptUI.updateInfo(smagnitude);
