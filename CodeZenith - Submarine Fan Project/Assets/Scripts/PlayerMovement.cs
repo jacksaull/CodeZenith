@@ -41,44 +41,12 @@ public class PlayerMovement : MonoBehaviour
         go_rigidBody.AddForce(transform.forward * 2);
         smagnitude = go_rigidBody.velocity.magnitude;
 
-        if (this.transform.position.y > 6.5)
-        {
-            this.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
-        }
+        //if (this.transform.position.y > 6.5)
+        //{
+        //    this.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
+        //}
 
-        if (Input.GetMouseButton(0))
-        {
-            if (currentRotation == -30)
-            {
-                rotation = Quaternion.Euler(-30, 90, 180);
-                this.gameObject.transform.rotation = rotation;
-            }
-            else
-            {
-                rotationX -= 0.5f;
-                currentRotation -= 0.5f;
-                rotation = Quaternion.Euler(rotationX, 90, 180);
-                this.gameObject.transform.rotation = rotation;
-            }
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            if (currentRotation == 30)
-            {
-                rotation = Quaternion.Euler(30, 90, 180);
-                this.gameObject.transform.rotation = rotation;
-            }
-            else
-            {
-                rotationX += 0.5f;
-                currentRotation += 0.5f;
-                rotation = Quaternion.Euler(rotationX, 90, 180);
-                this.gameObject.transform.rotation = rotation;
-            }
-        }
-
-
-        //if (arduino.readString == "Submarine going up")
+        //if (Input.GetMouseButton(0))
         //{
         //    if (currentRotation == -30)
         //    {
@@ -93,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         //        this.gameObject.transform.rotation = rotation;
         //    }
         //}
-        //else if (arduino.readString == "Submarine going down")
+        //else if (Input.GetMouseButton(1))
         //{
         //    if (currentRotation == 30)
         //    {
@@ -108,23 +76,55 @@ public class PlayerMovement : MonoBehaviour
         //        this.gameObject.transform.rotation = rotation;
         //    }
         //}
-        //else if (arduino.readString == "Submarine is level")
-        //{
-        //  if (currentRotation < 0)
-        //  {
-        //      rotationX += 0.5f;
-        //      currentRotation += 0.5f;
-        //      rotation = Quaternion.Euler(rotationX, 90, 180);
-        //      this.gameObject.transform.rotation = rotation;
-        //  }
-        //  else if (currentRotation > 0)
-        //  {
-        //      rotationX -= 0.5f;
-        //      currentRotation -= 0.5f;
-        //      rotation = Quaternion.Euler(rotationX, 90, 180);
-        //      this.gameObject.transform.rotation = rotation;
-        //  }
-        //}
+
+
+        if (arduino.readString == "Submarine going up")
+        {
+            if (currentRotation == -30)
+            {
+                rotation = Quaternion.Euler(-30, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+            else
+            {
+                rotationX -= 0.5f;
+                currentRotation -= 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+        }
+        else if (arduino.readString == "Submarine going down")
+        {
+            if (currentRotation == 30)
+            {
+                rotation = Quaternion.Euler(30, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+            else
+            {
+                rotationX += 0.5f;
+                currentRotation += 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+        }
+        else if (arduino.readString == "Submarine is level")
+        {
+            if (currentRotation < 0)
+            {
+                rotationX += 0.5f;
+                currentRotation += 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+            else if (currentRotation > 0)
+            {
+                rotationX -= 0.5f;
+                currentRotation -= 0.5f;
+                rotation = Quaternion.Euler(rotationX, 90, 180);
+                this.gameObject.transform.rotation = rotation;
+            }
+        }
 
         /*------------------------------------------------------------
          * ----------------------------------------------------------
