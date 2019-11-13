@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion rotation;
     private float rotationX = 0;
     private Rigidbody go_rigidBody;
-    private float speed = 5;
+    private float speed = 3.5f;
     private float smagnitude;
 
     private float currentRotation = 0;
