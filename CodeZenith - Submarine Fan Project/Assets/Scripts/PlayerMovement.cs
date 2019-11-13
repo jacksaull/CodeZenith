@@ -41,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
         go_rigidBody.AddForce(transform.forward * 2);
         smagnitude = go_rigidBody.velocity.magnitude;
 
-        //if (this.transform.position.y > 6.5)
-        //{
-        //    this.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
-        //}
+        if (this.transform.position.y > 6.5)
+        {
+            this.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
+        }
 
         //if (Input.GetMouseButton(0))
         //{

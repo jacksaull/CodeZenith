@@ -26,6 +26,7 @@ public class Comms : MonoBehaviour
                 {
                     Debug.Log("Trying to open serial port: " + "COM" + i);
                     stream.Open();
+
                     Debug.Log("Serial Port Open");
 
                     break;
@@ -45,6 +46,6 @@ public class Comms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        readString = stream.ReadLine();
     }
 }
