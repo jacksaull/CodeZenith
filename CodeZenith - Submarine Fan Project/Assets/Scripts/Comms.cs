@@ -18,13 +18,13 @@ public class Comms : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             portNum = i;
-            stream = new SerialPort("COM" + portNum, 9600);
+            stream = new SerialPort("COM3", 9600);
 
             if (!stream.IsOpen)
             {
                 try
                 {
-                    Debug.Log("Trying to open serial port: " + "COM" + i);
+                    Debug.Log("Trying to open serial port: " + "COM3");
                     stream.Open();
 
                     Debug.Log("Serial Port Open");

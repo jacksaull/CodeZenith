@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     public InfoUI ScriptUI;
     private Comms arduino; //Added
 
+    private double upperlimit = 6.5;
+    public double lowerlimit;
+
     void Start()
     {
         go_rigidBody = this.gameObject.GetComponent<Rigidbody>();
@@ -41,11 +44,15 @@ public class PlayerMovement : MonoBehaviour
         go_rigidBody.AddForce(transform.forward * 2);
         smagnitude = go_rigidBody.velocity.magnitude;
 
-        if (this.transform.position.y > 6.5)
+        if (this.transform.position.y > upperlimit)
         {
-            this.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
+            this.transform.position = new Vector3(transform.position.x, (float)upperlimit, transform.position.z);
         }
 
+        if (this.transform.position.y < lowerlimit)
+        {
+            this.transform.position = new Vector3(transform.position.x, (float)lowerlimit, transform.position.z);
+        }
         //if (Input.GetMouseButton(0))
         //{
         //    if (currentRotation == -30)
