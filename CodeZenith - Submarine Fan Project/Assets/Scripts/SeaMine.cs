@@ -12,7 +12,6 @@ public class SeaMine : MonoBehaviour
 
     private Light Light1;
     private Light Light2;
-    // Start is called before the first frame update
     void Start()
     {
        Light1 = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Light>();
@@ -21,7 +20,6 @@ public class SeaMine : MonoBehaviour
        InvokeRepeating("ToggleLight", 1f, 1f);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (height >= upperlimit)

@@ -11,8 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion rotation;
     private float rotationX = 0;
     private Rigidbody go_rigidBody;
-    private float speed = 3.5f;
+    private float speed = 2.3f;
+    private float rotationspeed = 0.25f;
     private float smagnitude;
+    public bool acceptInput = true;
 
     private float currentRotation = 0;
 
@@ -44,117 +46,136 @@ public class PlayerMovement : MonoBehaviour
         go_rigidBody.AddForce(transform.forward * 2);
         smagnitude = go_rigidBody.velocity.magnitude;
 
-        if (this.transform.position.y > upperlimit)
+        if (acceptInput == true)
         {
-            this.transform.position = new Vector3(transform.position.x, (float)upperlimit, transform.position.z);
-        }
 
-        if (this.transform.position.y < lowerlimit)
-        {
-            this.transform.position = new Vector3(transform.position.x, (float)lowerlimit, transform.position.z);
-        }
-        if (Input.GetMouseButton(0))
-        {
-            if (currentRotation == -30)
+            if (this.transform.position.y > upperlimit)
             {
-                rotation = Quaternion.Euler(-30, 90, 180);
-                this.gameObject.transform.rotation = rotation;
+                this.transform.position = new Vector3(transform.position.x, (float)upperlimit, transform.position.z);
+            }
+
+            if (this.transform.position.y < lowerlimit)
+            {
+                this.transform.position = new Vector3(transform.position.x, (float)lowerlimit, transform.position.z);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                if (currentRotation == -30)
+                {
+                    rotation = Quaternion.Euler(-30, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+                else
+                {
+                    rotationX -= rotationspeed;
+                    currentRotation -= rotationspeed;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                if (currentRotation == 30)
+                {
+                    rotation = Quaternion.Euler(30, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+                else
+                {
+                    rotationX += rotationspeed;
+                    currentRotation += rotationspeed;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+            }
+
+
+            //if (arduino.readString == "Submarine going up")
+            //{
+            //    if (currentRotation == -30)
+            //    {
+            //        rotation = Quaternion.Euler(-30, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //    else
+            //    {
+            //        rotationX -= 0.5f;
+            //        currentRotation -= 0.5f;
+            //        rotation = Quaternion.Euler(rotationX, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //}
+            //else if (arduino.readString == "Submarine going down")
+            //{
+            //    if (currentRotation == 30)
+            //    {
+            //        rotation = Quaternion.Euler(30, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //    else
+            //    {
+            //        rotationX += 0.5f;
+            //        currentRotation += 0.5f;
+            //        rotation = Quaternion.Euler(rotationX, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //}
+            //else if (arduino.readString == "Submarine is level")
+            //{
+            //    if (currentRotation < 0)
+            //    {
+            //        rotationX += 0.5f;
+            //        currentRotation += 0.5f;
+            //        rotation = Quaternion.Euler(rotationX, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //    else if (currentRotation > 0)
+            //    {
+            //        rotationX -= 0.5f;
+            //        currentRotation -= 0.5f;
+            //        rotation = Quaternion.Euler(rotationX, 90, 180);
+            //        this.gameObject.transform.rotation = rotation;
+            //    }
+            //}
+
+            /*------------------------------------------------------------
+             * ----------------------------------------------------------
+             */
+            if (Input.GetKey("w"))
+            {
+                go_rigidBody.AddForce(transform.forward * speed);
+                smagnitude = go_rigidBody.velocity.magnitude;
+
+                ScriptUI.updateInfo(smagnitude);
+            }
+
+            if (smagnitude > 0)
+            {
+                go_rigidBody.drag = 1.4f;
+                smagnitude = go_rigidBody.velocity.magnitude;
+
+                ScriptUI.updateInfo(smagnitude);
             }
             else
             {
-                rotationX -= 0.5f;
-                currentRotation -= 0.5f;
-                rotation = Quaternion.Euler(rotationX, 90, 180);
-                this.gameObject.transform.rotation = rotation;
+                go_rigidBody.drag = 1;
+                return;
             }
         }
-        else if (Input.GetMouseButton(1))
+        else if (acceptInput == false)
         {
-            if (currentRotation == 30)
+            if (smagnitude > 0)
             {
-                rotation = Quaternion.Euler(30, 90, 180);
-                this.gameObject.transform.rotation = rotation;
+                go_rigidBody.drag = 1.4f;
+                smagnitude = go_rigidBody.velocity.magnitude;
+
+                ScriptUI.updateInfo(smagnitude);
             }
             else
             {
-                rotationX += 0.5f;
-                currentRotation += 0.5f;
-                rotation = Quaternion.Euler(rotationX, 90, 180);
-                this.gameObject.transform.rotation = rotation;
+                go_rigidBody.drag = 1;
+                return;
             }
-        }
-
-
-        //if (arduino.readString == "Submarine going up")
-        //{
-        //    if (currentRotation == -30)
-        //    {
-        //        rotation = Quaternion.Euler(-30, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //    else
-        //    {
-        //        rotationX -= 0.5f;
-        //        currentRotation -= 0.5f;
-        //        rotation = Quaternion.Euler(rotationX, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //}
-        //else if (arduino.readString == "Submarine going down")
-        //{
-        //    if (currentRotation == 30)
-        //    {
-        //        rotation = Quaternion.Euler(30, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //    else
-        //    {
-        //        rotationX += 0.5f;
-        //        currentRotation += 0.5f;
-        //        rotation = Quaternion.Euler(rotationX, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //}
-        //else if (arduino.readString == "Submarine is level")
-        //{
-        //    if (currentRotation < 0)
-        //    {
-        //        rotationX += 0.5f;
-        //        currentRotation += 0.5f;
-        //        rotation = Quaternion.Euler(rotationX, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //    else if (currentRotation > 0)
-        //    {
-        //        rotationX -= 0.5f;
-        //        currentRotation -= 0.5f;
-        //        rotation = Quaternion.Euler(rotationX, 90, 180);
-        //        this.gameObject.transform.rotation = rotation;
-        //    }
-        //}
-
-        /*------------------------------------------------------------
-         * ----------------------------------------------------------
-         */
-        if (Input.GetKey("w"))
-        {
-            go_rigidBody.AddForce(transform.forward * speed);
-            smagnitude = go_rigidBody.velocity.magnitude;
-
-            ScriptUI.updateInfo(smagnitude);
-        }
-
-        if (smagnitude > 0)
-        {
-            go_rigidBody.drag = 1.4f;
-            smagnitude = go_rigidBody.velocity.magnitude;
-
-            ScriptUI.updateInfo(smagnitude);
-        }
-        else
-        {
-            go_rigidBody.drag = 1;
-            return;
         }
     }
 }
