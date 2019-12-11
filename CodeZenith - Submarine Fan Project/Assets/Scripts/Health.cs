@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public AudioClip Impact;
     public AudioClip Explosion;
     public ParticleSystem Boom;
+    public ParticleSystem RockImpact;
     public ParticleSystem Damage1;
     public ParticleSystem Damage2;
     private bool dmg1 = false;
@@ -51,6 +52,13 @@ public class Health : MonoBehaviour
             health -= 1;
             Instantiate(Boom, other.gameObject.transform.position, Quaternion.identity);
             audio.PlayOneShot(Explosion, 1);
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Rock")
+        {
+            health -= 1;
+            Instantiate(RockImpact, other.GetComponentInParent<Transform>().position, Quaternion.identity);
+            audio.PlayOneShot(Impact, 1);
             Destroy(other.gameObject);
         }
         else
