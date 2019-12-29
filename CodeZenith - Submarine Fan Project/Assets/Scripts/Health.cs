@@ -16,8 +16,11 @@ public class Health : MonoBehaviour
     public ParticleSystem Damage2;
     private bool dmg1 = false;
     private bool dmg2 = false;
+    public PlayerMovement playerMovement;
+    public DeathMenu deathMenu;
+    public EndMenu endMenu;
 
-    int health = 3;
+    public int health = 3;
     AudioSource audio;
     void Start()
     {
@@ -42,6 +45,7 @@ public class Health : MonoBehaviour
         else if(health == 0)
         {
             Health1.enabled = false;
+            Invoke("Damage", 0);
         }
     }
 
@@ -61,9 +65,9 @@ public class Health : MonoBehaviour
             audio.PlayOneShot(Impact, 1);
             Destroy(other.gameObject);
         }
-        else
+        else if (other.gameObject.tag == "Finish")
         {
-
+            endMenu.FinishLevel();
         }
     }
 
@@ -78,6 +82,11 @@ public class Health : MonoBehaviour
         {
             Damage2.Play();
             dmg2 = true;
+        }
+        if (health == 0)
+        {
+            playerMovement.Death();
+            deathMenu.Death();
         }
     }
 }

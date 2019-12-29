@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationspeed = 0.25f;
     private float smagnitude;
     public bool acceptInput = true;
+    private float moveSpeed = 2;
 
     private float currentRotation = 0;
 
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         go_rigidBody = this.gameObject.GetComponent<Rigidbody>();
         go_rigidBody.useGravity = false;
         Rotor.transform.localRotation = Quaternion.Euler(-180, 0, 0);
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        go_rigidBody.AddForce(transform.forward * 2);
+        go_rigidBody.AddForce(transform.forward * moveSpeed);
         smagnitude = go_rigidBody.velocity.magnitude;
 
         if (acceptInput == true)
@@ -176,6 +178,14 @@ public class PlayerMovement : MonoBehaviour
                 go_rigidBody.drag = 1;
                 return;
             }
+        }
+    }
+    public void Death()
+    {
+        while(moveSpeed > 0)
+        {
+            moveSpeed -= 0.05f;
+            speed = 0;
         }
     }
 }
