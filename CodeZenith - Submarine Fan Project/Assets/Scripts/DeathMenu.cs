@@ -14,6 +14,7 @@ public class DeathMenu : MonoBehaviour
     private float EngineVolume;
     private float AmbienceVolume;
     public TextMeshProUGUI currentLevel;
+    public UI ui;
     void Start()
     {
         DeathMenuPanel.SetActive(false);
@@ -29,7 +30,7 @@ public class DeathMenu : MonoBehaviour
 
     public void Death()
     {
-        Time.timeScale = 0;
+        ui.countDown = false;
         AudioSources.GetComponents<AudioSource>()[0].volume = 0.20f;
         AudioSources.GetComponents<AudioSource>()[1].volume = 0.10f;
         AudioSources.GetComponents<AudioSource>()[3].volume = 0.20f;

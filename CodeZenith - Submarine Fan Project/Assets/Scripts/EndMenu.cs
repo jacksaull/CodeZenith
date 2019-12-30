@@ -13,7 +13,13 @@ public class EndMenu : MonoBehaviour
     private float SonarVolume;
     private float EngineVolume;
     private float AmbienceVolume;
+    public PlayerMovement playerMovement;
+    public CameraTrack cameraTrack;
+    public UI ui;
 
+    private int timeScore;
+    private int healthScore;
+    private int sumScore;
     public TextMeshProUGUI finalScore;
     public TextMeshProUGUI finalTime;
     public Health finalHealth;
@@ -35,12 +41,18 @@ public class EndMenu : MonoBehaviour
 
     public void FinishLevel()
     {
+        healthScore = finalHealth.health * 25;
+        int.TryParse(finalTime.text, out timeScore);
+        sumScore = healthScore + timeScore;
         Time.timeScale = 0;
         AudioSources.GetComponents<AudioSource>()[0].volume = 0.20f;
         AudioSources.GetComponents<AudioSource>()[1].volume = 0.10f;
         AudioSources.GetComponents<AudioSource>()[3].volume = 0.20f;
         EndMenuPanel.SetActive(true);
-        finalScore.GetComponent<TMPro.TextMeshProUGUI>().text = ((finalHealth.health*25) + finalScore.text);
+        finalScore.GetComponent<TMPro.TextMeshProUGUI>().text = sumScore.ToString();
+        playerMovement.acceptInput = false;
+        cameraTrack.track = false;
+        ui.countDown = false;
     }
 
     public void QuitLevel()

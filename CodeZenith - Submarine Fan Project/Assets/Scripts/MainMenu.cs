@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
     void Start()
     {
         Time.timeScale = 1;
@@ -12,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-        
+        playerMovement.acceptInput = false;
     }
 
     public void StartBut()

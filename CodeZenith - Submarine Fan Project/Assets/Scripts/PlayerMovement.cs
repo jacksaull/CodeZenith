@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        acceptInput = true;
+
         Time.timeScale = 1;
         go_rigidBody = this.gameObject.GetComponent<Rigidbody>();
         go_rigidBody.useGravity = false;
@@ -182,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Death()
     {
+        acceptInput = false;
         while(moveSpeed > 0)
         {
             moveSpeed -= 0.05f;

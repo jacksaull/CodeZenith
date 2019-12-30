@@ -62,6 +62,7 @@ public class Health : MonoBehaviour
         {
             health -= 1;
             Instantiate(RockImpact, other.GetComponentInParent<Transform>().position, Quaternion.identity);
+            Instantiate(Boom, other.GetComponentInParent<Transform>().position, Quaternion.identity);
             audio.PlayOneShot(Impact, 1);
             Destroy(other.gameObject);
         }
