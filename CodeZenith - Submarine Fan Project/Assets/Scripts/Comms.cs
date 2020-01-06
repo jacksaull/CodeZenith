@@ -10,7 +10,7 @@ public class Comms : MonoBehaviour
     internal string readString;
     private int portNum;
 
-        SerialPort stream;
+    SerialPort stream;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +18,13 @@ public class Comms : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             portNum = i;
-            stream = new SerialPort("COM3", 9600);
+            stream = new SerialPort("COM6", 9600);
 
             if (!stream.IsOpen)
             {
                 try
                 {
-                    Debug.Log("Trying to open serial port: " + "COM3");
+                    Debug.Log("Trying to open serial port: " + "COM6");
                     stream.Open();
 
                     Debug.Log("Serial Port Open");
@@ -47,5 +47,6 @@ public class Comms : MonoBehaviour
     void Update()
     {
         readString = stream.ReadLine();
+        stream.ReadTimeout = 55;
     }
 }

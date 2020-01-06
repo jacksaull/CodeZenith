@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (acceptInput == true)
         {
-
             if (this.transform.position.y > upperlimit)
             {
                 this.transform.position = new Vector3(transform.position.x, (float)upperlimit, transform.position.z);
@@ -62,39 +61,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 this.transform.position = new Vector3(transform.position.x, (float)lowerlimit, transform.position.z);
             }
-            if (Input.GetMouseButton(0))
-            {
-                if (currentRotation == -30)
-                {
-                    rotation = Quaternion.Euler(-30, 90, 180);
-                    this.gameObject.transform.rotation = rotation;
-                }
-                else
-                {
-                    rotationX -= rotationspeed;
-                    currentRotation -= rotationspeed;
-                    rotation = Quaternion.Euler(rotationX, 90, 180);
-                    this.gameObject.transform.rotation = rotation;
-                }
-            }
-            else if (Input.GetMouseButton(1))
-            {
-                if (currentRotation == 30)
-                {
-                    rotation = Quaternion.Euler(30, 90, 180);
-                    this.gameObject.transform.rotation = rotation;
-                }
-                else
-                {
-                    rotationX += rotationspeed;
-                    currentRotation += rotationspeed;
-                    rotation = Quaternion.Euler(rotationX, 90, 180);
-                    this.gameObject.transform.rotation = rotation;
-                }
-            }
-
-
-            //if (arduino.readString == "Submarine going up")
+            //if (Input.GetMouseButton(0))
             //{
             //    if (currentRotation == -30)
             //    {
@@ -103,13 +70,13 @@ public class PlayerMovement : MonoBehaviour
             //    }
             //    else
             //    {
-            //        rotationX -= 0.5f;
-            //        currentRotation -= 0.5f;
+            //        rotationX -= rotationspeed;
+            //        currentRotation -= rotationspeed;
             //        rotation = Quaternion.Euler(rotationX, 90, 180);
             //        this.gameObject.transform.rotation = rotation;
             //    }
             //}
-            //else if (arduino.readString == "Submarine going down")
+            //else if (Input.GetMouseButton(1))
             //{
             //    if (currentRotation == 30)
             //    {
@@ -118,35 +85,71 @@ public class PlayerMovement : MonoBehaviour
             //    }
             //    else
             //    {
-            //        rotationX += 0.5f;
-            //        currentRotation += 0.5f;
+            //        rotationX += rotationspeed;
+            //        currentRotation += rotationspeed;
             //        rotation = Quaternion.Euler(rotationX, 90, 180);
             //        this.gameObject.transform.rotation = rotation;
             //    }
             //}
-            //else if (arduino.readString == "Submarine is level")
-            //{
-            //    if (currentRotation < 0)
-            //    {
-            //        rotationX += 0.5f;
-            //        currentRotation += 0.5f;
-            //        rotation = Quaternion.Euler(rotationX, 90, 180);
-            //        this.gameObject.transform.rotation = rotation;
-            //    }
-            //    else if (currentRotation > 0)
-            //    {
-            //        rotationX -= 0.5f;
-            //        currentRotation -= 0.5f;
-            //        rotation = Quaternion.Euler(rotationX, 90, 180);
-            //        this.gameObject.transform.rotation = rotation;
-            //    }
-            //}
+
+
+            if (arduino.readString == "Submarine going up")
+            {
+                Debug.Log("UP");
+                if (currentRotation == -30)
+                {
+                    rotation = Quaternion.Euler(-30, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+                else
+                {
+                    rotationX -= 0.5f;
+                    currentRotation -= 0.5f;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+            }
+            else if (arduino.readString == "Submarine going down")
+            {
+                Debug.Log("DOWN");
+                if (currentRotation == 30)
+                {
+                    rotation = Quaternion.Euler(30, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+                else
+                {
+                    rotationX += 0.5f;
+                    currentRotation += 0.5f;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+            }
+            else if (arduino.readString == "Submarine is level")
+            {
+                Debug.Log("LEVEL");
+                if (currentRotation < 0)
+                {
+                    rotationX += 0.5f;
+                    currentRotation += 0.5f;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+                else if (currentRotation > 0)
+                {
+                    rotationX -= 0.5f;
+                    currentRotation -= 0.5f;
+                    rotation = Quaternion.Euler(rotationX, 90, 180);
+                    this.gameObject.transform.rotation = rotation;
+                }
+            }
 
             /*------------------------------------------------------------
              * ----------------------------------------------------------
              */
             if (Input.GetKey("w"))
             {
+                Debug.Log("BOOST");
                 go_rigidBody.AddForce(transform.forward * speed);
                 smagnitude = go_rigidBody.velocity.magnitude;
 
@@ -182,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    public void Death()
+        public void Death()
     {
         acceptInput = false;
         while(moveSpeed > 0)
