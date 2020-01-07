@@ -3415,6 +3415,11 @@ PrefabInstance:
       propertyPath: finalHealth
       value: 
       objectReference: {fileID: 8296172668306265051}
+    - target: {fileID: 5145153983893215995, guid: 1571ed567d7f9e143a345e64686193ce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 5145153983292058097, guid: 1571ed567d7f9e143a345e64686193ce,
         type: 3}
       propertyPath: m_text
@@ -3439,11 +3444,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.z
       value: 76.78142
-      objectReference: {fileID: 0}
-    - target: {fileID: 5145153983893215995, guid: 1571ed567d7f9e143a345e64686193ce,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1571ed567d7f9e143a345e64686193ce, type: 3}
@@ -3602,6 +3602,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
+    - target: {fileID: 3195961154967183517, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: port
+      value: COM7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: Health1
+      value: 
+      objectReference: {fileID: 126995047}
+    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: Health2
+      value: 
+      objectReference: {fileID: 1944630523}
+    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: Health3
+      value: 
+      objectReference: {fileID: 1662244278}
+    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: deathMenu
+      value: 
+      objectReference: {fileID: 559567305}
+    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
+        type: 3}
+      propertyPath: endMenu
+      value: 
+      objectReference: {fileID: 559567306}
     - target: {fileID: 2250625848208992012, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
         type: 3}
       propertyPath: ScriptUI
@@ -3667,31 +3697,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
-        type: 3}
-      propertyPath: Health1
-      value: 
-      objectReference: {fileID: 126995047}
-    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
-        type: 3}
-      propertyPath: Health2
-      value: 
-      objectReference: {fileID: 1944630523}
-    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
-        type: 3}
-      propertyPath: Health3
-      value: 
-      objectReference: {fileID: 1662244278}
-    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
-        type: 3}
-      propertyPath: deathMenu
-      value: 
-      objectReference: {fileID: 559567305}
-    - target: {fileID: 2250625848208992011, guid: 76873cc5512b24a4b9bfe6cdcb28b471,
-        type: 3}
-      propertyPath: endMenu
-      value: 
-      objectReference: {fileID: 559567306}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76873cc5512b24a4b9bfe6cdcb28b471, type: 3}
 --- !u!1 &8296172668306265049 stripped

@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sunlight Zone - 2.unity
     guid: fbaac431688b3ac4697ae05589595193
+  - enabled: 1
+    path: Assets/Scenes/Twilight Zone - 1.unity
+    guid: 43a41ffb655cff2439246433332a31d6
+  - enabled: 1
+    path: Assets/Scenes/Twilight Zone - 2.unity
+    guid: 52b5d409c22b87a4795e4ac569de8702
+  - enabled: 1
+    path: Assets/Scenes/Abyss Zone - 1.unity
+    guid: d5f696cbc3984624abe4307adf4d3e0c
   m_configObjects: {}

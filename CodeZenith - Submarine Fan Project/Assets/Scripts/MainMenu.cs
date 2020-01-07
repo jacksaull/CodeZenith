@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public PlayerMovement playerMovement;
     public Comms comms;
     private Toggle inputControls;
+    public Text inputText;
     void Start()
     {
         PlayerPrefs.SetInt("Input", 1);
@@ -33,6 +34,11 @@ public class MainMenu : MonoBehaviour
         }
 
         inputControls.isOn = !inputControls.isOn;
+    }
+
+    public void portValue()
+    {
+        PlayerPrefs.SetString("Port", inputText.text);
     }
 
     public void StartBut()

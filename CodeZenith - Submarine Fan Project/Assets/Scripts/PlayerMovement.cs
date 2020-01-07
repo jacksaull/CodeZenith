@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 fanValue = int.Parse(arduino.readString); 
-                if (fanValue <= 130 && fanValue >= 120 && canBoost == true)
+                if (fanValue <= 130 && fanValue >= 110 && canBoost == true)
                 {
                     Debug.Log("BOOST");
                     for(int i = 0; i < 40; i++)

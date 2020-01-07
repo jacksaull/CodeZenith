@@ -9,22 +9,24 @@ public class Comms : MonoBehaviour
     [SerializeField]
     internal string readString;
     private int portNum;
+    private string port;
 
     SerialPort stream;
     // Start is called before the first frame update
     void Start()
     {
+        port = PlayerPrefs.GetString("Port");
         //Initialise the serial port
         for (int i = 0; i < 10; i++)
         {
             portNum = i;
-            stream = new SerialPort("COM3", 9600);
+            stream = new SerialPort(port, 9600);
 
             if (!stream.IsOpen)
             {
                 try
                 {
-                    Debug.Log("Trying to open serial port: " + "COM3");
+                    Debug.Log("Trying to open serial port: " + "COM7");
                     stream.Open();
 
                     Debug.Log("Serial Port Open");
