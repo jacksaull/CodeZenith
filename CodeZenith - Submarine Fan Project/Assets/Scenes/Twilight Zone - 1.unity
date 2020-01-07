@@ -1878,6 +1878,16 @@ PrefabInstance:
       propertyPath: nextLevelName
       value: Twilight Zone - 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7568462690065581724, guid: 1571ed567d7f9e143a345e64686193ce,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.6269236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568462690065581724, guid: 1571ed567d7f9e143a345e64686193ce,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.118056
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1571ed567d7f9e143a345e64686193ce, type: 3}
 --- !u!1001 &986854142
