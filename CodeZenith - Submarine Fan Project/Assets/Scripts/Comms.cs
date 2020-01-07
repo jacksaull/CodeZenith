@@ -18,13 +18,13 @@ public class Comms : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             portNum = i;
-            stream = new SerialPort("COM6", 9600);
+            stream = new SerialPort("COM7", 9600);
 
             if (!stream.IsOpen)
             {
                 try
                 {
-                    Debug.Log("Trying to open serial port: " + "COM6");
+                    Debug.Log("Trying to open serial port: " + "COM7");
                     stream.Open();
 
                     Debug.Log("Serial Port Open");
@@ -41,6 +41,11 @@ public class Comms : MonoBehaviour
         }
 
 
+    }
+
+    public void closePort()
+    {
+        stream.Close();
     }
 
     // Update is called once per frame

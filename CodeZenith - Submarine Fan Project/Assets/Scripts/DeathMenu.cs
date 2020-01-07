@@ -9,6 +9,7 @@ public class DeathMenu : MonoBehaviour
 {
     public GameObject DeathMenuPanel;
     public GameObject AudioSources;
+    public Comms comms;
     private float MusicVolume;
     private float SonarVolume;
     private float EngineVolume;
@@ -48,5 +49,6 @@ public class DeathMenu : MonoBehaviour
         AudioSources.GetComponents<AudioSource>()[1].volume = SonarVolume;
         AudioSources.GetComponents<AudioSource>()[3].volume = AmbienceVolume;
         SceneManager.LoadScene(currentLevel.text, LoadSceneMode.Single);
+        comms.closePort();
     }
 }

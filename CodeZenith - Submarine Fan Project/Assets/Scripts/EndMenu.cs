@@ -16,6 +16,7 @@ public class EndMenu : MonoBehaviour
     public PlayerMovement playerMovement;
     public CameraTrack cameraTrack;
     public UI ui;
+    public Comms comms;
 
     private int timeScore;
     private int healthScore;
@@ -63,5 +64,6 @@ public class EndMenu : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+        comms.closePort();    
     }
 }
