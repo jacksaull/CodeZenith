@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using TMPro;
 using UnityEngine;
 
 
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion rotation;
     private float rotationX = 0;
     private Rigidbody go_rigidBody;
-    private float speed = 2.3f;
+    private float speed = 10.3f;
     private float rotationspeed = 0.25f;
     private float smagnitude;
     public bool acceptInput = true;
@@ -19,11 +20,14 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed = 2;
 
     private float currentRotation = 0;
+    private int fanValue;
+    private bool canBoost;
 
     private float rotorSpeed = 0;
     private float rotorRate = 5f;
     private float currentRotorRotation;
     public InfoUI ScriptUI;
+    public TextMeshProUGUI boostStatus;
     private Comms arduino; //Added
 
     private double upperlimit = 6.5;
@@ -31,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("Input") == 1)
+        canBoost = true;
+        if (PlayerPrefs.GetInt("Input") == 1)
         {
             mouseControls = true;
         }
@@ -56,6 +61,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(canBoost == true)
+        {
+            boostStatus.text = "Yes";
+        }
+        else if (canBoost == false)
+        {
+            boostStatus.text = "No";
+        }
+
         go_rigidBody.AddForce(transform.forward * moveSpeed);
         smagnitude = go_rigidBody.velocity.magnitude;
 
@@ -102,6 +116,28 @@ public class PlayerMovement : MonoBehaviour
                         rotation = Quaternion.Euler(rotationX, 90, 180);
                         this.gameObject.transform.rotation = rotation;
                     }
+                }
+
+                if (Input.GetKey("w"))
+                {
+                    Debug.Log("BOOST");
+                    go_rigidBody.AddForce(transform.forward * speed);
+                    smagnitude = go_rigidBody.velocity.magnitude;
+
+                    ScriptUI.updateInfo(smagnitude);
+                }
+
+                if (smagnitude > 0)
+                {
+                    go_rigidBody.drag = 1.4f;
+                    smagnitude = go_rigidBody.velocity.magnitude;
+
+                    ScriptUI.updateInfo(smagnitude);
+                }
+                else
+                {
+                    go_rigidBody.drag = 1;
+                    return;
                 }
             }
 
@@ -157,32 +193,40 @@ public class PlayerMovement : MonoBehaviour
                         this.gameObject.transform.rotation = rotation;
                     }
                 }
+
+                fanValue = int.Parse(arduino.readString); 
+                if (fanValue <= 130 && fanValue >= 120 && canBoost == true)
+                {
+                    Debug.Log("BOOST");
+                    for(int i = 0; i < 40; i++)
+                    {
+                        go_rigidBody.AddForce(transform.forward * speed);
+                    }
+                    
+                    smagnitude = go_rigidBody.velocity.magnitude;
+
+                    ScriptUI.updateInfo(smagnitude);
+                    Invoke("RestoreBoost", 3);
+                    canBoost = false;
+                }
+
+                if (smagnitude > 0)
+                {
+                    go_rigidBody.drag = 1.4f;
+                    smagnitude = go_rigidBody.velocity.magnitude;
+
+                    ScriptUI.updateInfo(smagnitude);
+                }
+                else
+                {
+                    go_rigidBody.drag = 1;
+                    return;
+                }
             }
 
             /*------------------------------------------------------------
              * ----------------------------------------------------------
              */
-            if (Input.GetKey("w"))
-            {
-                Debug.Log("BOOST");
-                go_rigidBody.AddForce(transform.forward * speed);
-                smagnitude = go_rigidBody.velocity.magnitude;
-
-                ScriptUI.updateInfo(smagnitude);
-            }
-
-            if (smagnitude > 0)
-            {
-                go_rigidBody.drag = 1.4f;
-                smagnitude = go_rigidBody.velocity.magnitude;
-
-                ScriptUI.updateInfo(smagnitude);
-            }
-            else
-            {
-                go_rigidBody.drag = 1;
-                return;
-            }
         }
         else if (acceptInput == false)
         {
@@ -200,6 +244,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    void RestoreBoost()
+    {
+        canBoost = true;
+    }
+    
         public void Death()
     {
         acceptInput = false;
